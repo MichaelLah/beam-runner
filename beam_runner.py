@@ -11,7 +11,6 @@ def on_press(key):
     # os.system('clear')
     print("Key pressed")
 
-
 def on_release(key):
     print("Key released")
     print('\r')
