@@ -21,8 +21,14 @@ def on_release(key):
         # Stop listener
         return False
 
+
 def open_beam_api():
     subprocess.run(['rubymine', beam_api_dir])
+
+
+def start_beam_api():
+    subprocess.run(['./dev_env', 'run'], cwd=beam_api_dir)
+
 
 def start_js():
     subprocess.run(['yarn', 'start', 'all'], cwd=beam_js_dir)
@@ -101,7 +107,7 @@ if __name__ == '__main__':
     if option == '1':
         repo_options()
     elif option == '2':
-        pass
+        start_beam_api()
     elif option == '3':
         start_js()
     elif option == '4':
