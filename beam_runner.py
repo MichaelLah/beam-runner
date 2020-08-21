@@ -3,7 +3,7 @@ from pynput import keyboard
 import os
 import subprocess
 
-beam_api_dir = '~/Documents/GitHub/beam-api/'
+beam_api_dir = '/Users/michaellah/Documents/GitHub/beam-api'
 docker_dir = '.docker/web-services.yml'
 beam_js_dir = ''
 
@@ -25,12 +25,12 @@ def docker():
     print("DOWN!")
     # subprocess.run(f'docker-compose -f {beam_api_dir}{docker_dir} down')
     # TODO replace the rest with subprocess!
-    subprocess.run(['docker-compose', '-f', beam_api_dir, docker_dir, 'down'])
-    print("BUILD!")
-    subprocess.run(f'docker-compose -f {beam_api_dir}{docker_dir} build')
+    subprocess.run(['docker-compose', '-f', f'{beam_api_dir}/{docker_dir}', "down"], cwd=beam_api_dir)
+    print("BUILD!!!")
+    subprocess.run(['docker-compose', '-f', f'{beam_api_dir}/{docker_dir}', "build"], cwd=beam_api_dir)
     print("UP!")
-    subprocess.run(f'docker-compose -f {beam_api_dir}{docker_dir} up')
-    pass
+    subprocess.run(['docker-compose', '-f', f'{beam_api_dir}/{docker_dir}', "up", "-d"], cwd=beam_api_dir)
+
     # cd
     # ~ / Documents / GitHub / beam - api /
     # docker - compose - f.docker / web - services.yml down
