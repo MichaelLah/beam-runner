@@ -3,9 +3,37 @@ from pynput import keyboard
 import os
 import subprocess
 
+KATA_OPTIONS = {
+    1: 'JS Kata',
+    2: 'Ruby Kata',
+    3: 'Marketing Kata'
+}
+
+MENU_OPTIONS = {
+    1: 'open repo',
+    2: 'start beam-api',
+    3: 'start js-frontend',
+    4: 'start docker',
+    5: 'start auth server',
+    6: 'Full environment start'
+}
+
+REPO_OPTIONS = {
+    1: "beam-api",
+    2: "js-frontend",
+    3: 'auth-server',
+    4: 'mobile app',
+    5: 'Katas',
+    6: 'Perks server',
+    7: 'PETL',
+    8: 'beam-sftp-dev'
+}
+
 beam_api_dir = '/Users/michaellah/Documents/GitHub/beam-api'
 docker_dir = '.docker/web-services.yml'
 beam_js_dir = '/Users/michaellah/Documents/GitHub/js-frontend'
+beam_auth_dir = '/Users/michaellah/Documents/GitHub/authentication-server'
+
 
 def on_press(key):
     # os.system('clear')
@@ -20,6 +48,10 @@ def on_release(key):
     if key == keyboard.Key.esc:
         # Stop listener
         return False
+
+
+def start_auth_server():
+    subprocess.run(['rubymine', beam_api_dir])
 
 
 def open_beam_api():
@@ -45,31 +77,22 @@ def docker():
 
 
 def kata_options():
-    print('1. JS Kata')
-    print('2. Ruby Kata')
-    print('3. Marketing Kata')
+    print_options(KATA_OPTIONS)
     kata_option = input()
-    if option == '1':
-        repo_options()
-    elif option == '2':
+    if kata_option == KATA_OPTIONS['JS_KATA']:
+        subprocess.run(['rubymine', beam_js_dir])
+    elif kata_option == '2':
         pass
-    elif option == '3':
+    elif kata_option == '3':
         pass
-    elif option == '4':
+    elif kata_option == '4':
         docker()
-    elif option == '5':
+    elif kata_option == '5':
         pass
 
 
 def repo_options():
-    print('1. beam-api')
-    print('2. js-frontend')
-    print('3. auth-server')
-    print('4. mobile app')
-    print('5. Katas')
-    print('6. Perks server')
-    print('7. PETL')
-    print('8. beam-sftp-dev')
+    print_options(REPO_OPTIONS)
     repo_option = input()
 
     if repo_option == '1':
@@ -81,7 +104,7 @@ def repo_options():
     elif repo_option == '4':
         pass
     elif repo_option == '5':
-        kata_options
+        kata_options()
     elif repo_option == '6':
         pass
     elif repo_option == '7':
@@ -90,19 +113,14 @@ def repo_options():
         pass
 
 
-    # print('5. JS kata')
-    # print('6. Ruby kata')
-def print_options():
-    print('1. open repo')
-    print('2. start beam-api ')
-    print('3. start js-frontend')
-    print('4. start docker')
-    print('5. Full environment start')
+def print_options(options_hash):
+    for x in options_hash:
+        print(f'{x}. {options_hash[x]}')
     print('>> ', end='')
 
 
 if __name__ == '__main__':
-    print_options()
+    print_options(MENU_OPTIONS)
     option = input()
     if option == '1':
         repo_options()
@@ -113,6 +131,8 @@ if __name__ == '__main__':
     elif option == '4':
         docker()
     elif option == '5':
+        start_auth_server()
+    elif option == '6':
         pass
 
     # with keyboard.Listener(
