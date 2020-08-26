@@ -33,6 +33,14 @@ beam_api_dir = '/Users/michaellah/Documents/GitHub/beam-api'
 docker_dir = '.docker/web-services.yml'
 beam_js_dir = '/Users/michaellah/Documents/GitHub/js-frontend'
 beam_auth_dir = '/Users/michaellah/Documents/GitHub/authentication-server'
+perks_server_dir = '/Users/michaellah/Documents/GitHub/perks-server'
+petl_dir = '/Users/michaellah/Documents/GitHub/provider-etl'
+beam_sftp_dir = '/Users/michaellah/Documents/GitHub/beam-sftp-dev'
+mobile_dir = '/Users/michaellah/Documents/GitHub/beam-brush-unified'
+
+kata_js_dir = '/Users/michaellah/Documents/GitHub/boxing-kata-js'
+kata_ruby_dir = '/Users/michaellah/Documents/GitHub/boxing-kata-ruby'
+kata_marketing_dir = '/Users/michaellah/Documents/GitHub/marketing-kata-html'
 
 
 def on_press(key):
@@ -51,7 +59,7 @@ def on_release(key):
 
 
 def start_auth_server():
-    subprocess.run(['rubymine', beam_api_dir])
+    subprocess.run(['rails', 's'], cwd=beam_auth_dir)
 
 
 def open_beam_api():
@@ -70,6 +78,26 @@ def open_js():
     subprocess.run(['rubymine', beam_js_dir])
 
 
+def open_auth():
+    subprocess.run(['rubymine', beam_auth_dir])
+
+
+def open_mobile():
+    subprocess.run(['rubymine', mobile_dir])
+
+
+def open_perks_server():
+    subprocess.run(['rubymine', perks_server_dir])
+
+
+def open_petl():
+    subprocess.run(['rubymine', petl_dir])
+
+
+def open_sftp():
+    subprocess.run(['rubymine', beam_sftp_dir])
+
+
 def docker():
     subprocess.run(['docker-compose', '-f', f'{beam_api_dir}/{docker_dir}', "down"], cwd=beam_api_dir)
     subprocess.run(['docker-compose', '-f', f'{beam_api_dir}/{docker_dir}', "build"], cwd=beam_api_dir)
@@ -79,16 +107,12 @@ def docker():
 def kata_options():
     print_options(KATA_OPTIONS)
     kata_option = input()
-    if kata_option == KATA_OPTIONS['JS_KATA']:
-        subprocess.run(['rubymine', beam_js_dir])
+    if kata_option == '1':
+        subprocess.run(['rubymine', kata_js_dir])
     elif kata_option == '2':
-        pass
+        subprocess.run(['rubymine', kata_ruby_dir])
     elif kata_option == '3':
-        pass
-    elif kata_option == '4':
-        docker()
-    elif kata_option == '5':
-        pass
+        subprocess.run(['rubymine', kata_marketing_dir])
 
 
 def repo_options():
@@ -100,17 +124,17 @@ def repo_options():
     elif repo_option == '2':
         open_js()
     elif repo_option == '3':
-        pass
+        open_auth
     elif repo_option == '4':
-        pass
+        open_mobile
     elif repo_option == '5':
         kata_options()
     elif repo_option == '6':
-        pass
+        open_perks_server
     elif repo_option == '7':
-        pass
+        open_petl
     elif repo_option == '8':
-        pass
+        open_sftp
 
 
 def print_options(options_hash):
